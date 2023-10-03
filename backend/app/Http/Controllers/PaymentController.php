@@ -33,8 +33,8 @@ class PaymentController extends Controller
         /** @var Payment $payment */
         $payment = $transactionDto['payment'];
         $paymentMessage = new PaymentMessage($payment->user, $payment);
-        $tgService = new TelegramService([131231613, 463609933, 6138432791]);
-        $tgService->send($paymentMessage);
+        //$tgService = new TelegramService([131231613, 463609933, 6138432791]);
+        //$tgService->send($paymentMessage);
 
         return response()->json([
             'access_token'   => $registrationDto->token->plainTextToken,
@@ -57,8 +57,8 @@ class PaymentController extends Controller
         }
 
         $paymentMessage = new PaymentMessage($payment->user, $payment);
-        $tgService = new TelegramService([131231613, 463609933, 6138432791]);
-        $tgService->send($paymentMessage);
+        //$tgService = new TelegramService([131231613, 463609933, 6138432791]);
+        //$tgService->send($paymentMessage);
 
         return response()->json([
             'payment_status' => 'success',

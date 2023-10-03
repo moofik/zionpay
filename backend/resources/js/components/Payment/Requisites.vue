@@ -119,8 +119,8 @@ p:last-child {
 }
 
 .donation-description-1 {
-  color: #ffeadc;
-  background: #ff5b03;
+  color: white;
+  background: #4c9f81;
   border: 10px;
   margin-top: 1em;
   border-radius: 5em;
@@ -132,8 +132,8 @@ p:last-child {
 
 .donation-description-1::before {
   position: absolute;
-  color: #ffeadc;
-  background: #ffeadc;
+  color: white;
+  background: #091013;
   border: 10px;
   width: 5em;
   height: 5em;
@@ -145,7 +145,7 @@ p:last-child {
 
 .donation-description-1::after {
   position: absolute;
-  color: #ffeadc;
+  color: white;
   background-image: url("/images/icon1.png");
   background-position: center;
   background-size: 3.3em 3.3em;
@@ -160,8 +160,8 @@ p:last-child {
 }
 
 .donation-description-2 {
-  color: #ffeadc;
-  background: #ff8b2e;
+  color: white;
+  background: #7aae96;
   border: 10px;
   margin-top: 1em;
   border-radius: 5em;
@@ -171,7 +171,7 @@ p:last-child {
 }
 
 .donation-description-3 {
-  color: #ffeadc;
+  color: white;
   background: #ff5b03;
   border: 10px;
   margin-top: 1em;
@@ -186,8 +186,8 @@ p:last-child {
 
 .donation-description-3::before {
   position: absolute;
-  color: #ffeadc;
-  background: #ffeadc;
+  color: #091013;
+  background: #091013;
   border: 10px;
   width: 5em;
   height: 5em;
@@ -199,7 +199,7 @@ p:last-child {
 
 .donation-description-3::after {
   position: absolute;
-  color: #ffeadc;
+  color: #091013;
   background-image: url("/images/icon2.png");
   background-position: center;
   background-size: 3.3em 3.3em;
@@ -215,7 +215,7 @@ p:last-child {
 
 
 .donation-description-4 {
-  color: black;
+  color: white;
   font-weight: bold;
   padding: 1.3em;
   font-size: 0.8em;
@@ -232,8 +232,8 @@ p:last-child {
 @media (min-width: 420px) and (max-width: 540px) {
   .donation-description-1::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -245,7 +245,7 @@ p:last-child {
 
   .donation-description-1::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon1.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -261,8 +261,8 @@ p:last-child {
 
   .donation-description-3::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -274,7 +274,7 @@ p:last-child {
 
   .donation-description-3::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon2.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -292,8 +292,8 @@ p:last-child {
 @media (min-width: 540px) and (max-width: 770px) {
   .donation-description-1::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -305,7 +305,7 @@ p:last-child {
 
   .donation-description-1::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon1.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -321,8 +321,8 @@ p:last-child {
 
   .donation-description-3::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -334,7 +334,7 @@ p:last-child {
 
   .donation-description-3::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon2.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -352,8 +352,8 @@ p:last-child {
 @media (min-width: 770px) and (max-width: 992px) {
   .donation-description-1::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -365,7 +365,7 @@ p:last-child {
 
   .donation-description-1::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon1.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -381,8 +381,8 @@ p:last-child {
 
   .donation-description-3::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -394,7 +394,7 @@ p:last-child {
 
   .donation-description-3::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon2.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -413,8 +413,8 @@ p:last-child {
 @media (min-width: 992px) and (max-width: 1399px) {
   .donation-description-1::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -426,7 +426,7 @@ p:last-child {
 
   .donation-description-1::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon1.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -442,8 +442,8 @@ p:last-child {
 
   .donation-description-3::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -455,7 +455,7 @@ p:last-child {
 
   .donation-description-3::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon2.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -473,8 +473,8 @@ p:last-child {
 @media (min-width: 1400px) {
   .donation-description-1::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -486,7 +486,7 @@ p:last-child {
 
   .donation-description-1::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon1.png");
     background-position: center;
     background-size: 3.3em 3.3em;
@@ -502,8 +502,8 @@ p:last-child {
 
   .donation-description-3::before {
     position: absolute;
-    color: #ffeadc;
-    background: #ffeadc;
+    color: #091013;
+    background: #091013;
     border: 10px;
     width: 5em;
     height: 5em;
@@ -515,7 +515,7 @@ p:last-child {
 
   .donation-description-3::after {
     position: absolute;
-    color: #ffeadc;
+    color: #091013;
     background-image: url("/images/icon2.png");
     background-position: center;
     background-size: 3.3em 3.3em;
