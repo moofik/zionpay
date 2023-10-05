@@ -17,13 +17,12 @@ trait Registration
      */
     public function registerUser(Request $request, int $datasourceId = 1): RegistrationDto
     {
-        $validatedData = $request->safe()->only(['email', 'external_id']);
+        $validatedData = $request->safe()->only(['email']);
         $password = Str::password(10);
 
         $user = User::create([
             'email' => $validatedData['email'],
             'password' => Hash::make($password),
-            'external_id' => $validatedData['external_id'],
             'datasource_id' => $datasourceId
         ]);
         $registrationDto = new RegistrationDto();

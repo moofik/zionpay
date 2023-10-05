@@ -24,7 +24,7 @@ class PayRequest extends FormRequest
         return [
             'external_id' => 'required|string',
             'payment_amount' => 'required',
-            'currency' => 'string',
+            'currency' => 'required|string',
             'payment_method' => 'required',
             'file' => 'mimes:jpg,png,pdf,gif,jpeg,gif,bmp'
         ];

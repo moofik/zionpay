@@ -51,14 +51,13 @@ class Payment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'donation_type',
         'currency',
         'payment_amount',
         'payment_method',
         'tokens_amount',
         'recipient_address',
         'attachment',
-        'external_id',
+        'payment_uuid',
         'email'
     ];
 
@@ -67,8 +66,5 @@ class Payment extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    protected $casts = [];
 }

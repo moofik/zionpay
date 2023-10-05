@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('donation_type')->comment('donation type');
             $table->string('currency')->comment('payment currency');
             $table->decimal('payment_amount')->comment('payment amount');
             $table->string('payment_method')->comment('recipient issuer bank');

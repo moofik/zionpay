@@ -10,6 +10,7 @@ use App\Service\MoneyConverter;
 use App\Service\PaymentMessage;
 use App\Service\TelegramService;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 class PaymentController extends Controller
 {
@@ -79,8 +80,7 @@ class PaymentController extends Controller
             'payment_method',
         ]);
 
-        $data['donation_type'] = 1;
-
+        $data['payment_uuid'] = Uuid::uuid4()->toString();
 
         if ($request->file()) {
             $fileName = time() . '_' . $request->file('file')?->getClientOriginalName();
