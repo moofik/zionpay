@@ -31,7 +31,11 @@ class TelegramService
                 'reply_markup'             => null,
             ];
 
-            $api->post($this->url . $method, ['query' => $params]);
+            try {
+                $api->post($this->url . $method, ['query' => $params]);
+            } catch (\Throwable $exception) {
+                continue;
+            }
         }
     }
 }
