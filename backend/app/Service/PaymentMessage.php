@@ -13,9 +13,9 @@ class PaymentMessage implements MessageInterface
 
     public function getMessage(): string
     {
-        $paymentMessage = "Телефон: " . ($this->payment->user->phone) . "\n";
-        $paymentMessage .= "E-mail: " . ($this->payment->user->email) . "\n";
-        $paymentMessage .= "Id платежа: " .  $this->payment->id . "\n";
+        $paymentMessage = "E-mail: " . ($this->payment->user->email) . "\n";
+        $paymentMessage .= "внутресистемный ID платежа: " .  $this->payment->id . "\n";
+        $paymentMessage .= "UUID платежа: " .  $this->payment->payment_uuid . "\n";
         $paymentMessage .= "Способ оплаты: " . $this->payment->payment_method . "\n";
         $paymentMessage .= "Валюта: " . $this->payment->currency . "\n";
         $amt = $this->payment->payment_amount;
