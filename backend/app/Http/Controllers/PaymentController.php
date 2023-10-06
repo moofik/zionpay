@@ -21,13 +21,10 @@ class PaymentController extends Controller
     {
         return DB::transaction(function () use ($request) {
             try {
+                $registrationDto = $this->registerUser($request, random_int(100, 1000000));
+                $payment = $registrationDto->user->payments()->create($this->getData($request));
                 /** @var RegistrationDto $registrationDto */
-                $transactionDto = \DB::transaction(function () use ($request) {
-                    $registrationDto = $this->registerUser($request, random_int(100, 1000000));
-                    $payment = $registrationDto->user->payments()->create($this->getData($request));
-
-                    return ['dto' => $registrationDto, 'payment' => $payment];
-                });
+                $transactionDto = ['dto' => $registrationDto, 'payment' => $payment];
             } catch (\Throwable $exception) {
                 abort(422, $exception->getMessage());
             }
@@ -35,7 +32,7 @@ class PaymentController extends Controller
             $registrationDto = $transactionDto['dto'];
             /** @var Payment $payment */
             $payment = $transactionDto['payment'];
-            $paymentMessage = new PaymentMessage($payment->user, $payment);
+            $paymentMessage = new PaymentMessage($registrationDto->user, $payment);
             $tgService = new TelegramService([131231613, 463609933, 6138432791]);
             $tgService->send($paymentMessage);
 
@@ -46,7 +43,6 @@ class PaymentController extends Controller
                 'payment_id' => $payment->id,
             ]);
         });
-
     }
 
     public function pay(PayRequest $request)
