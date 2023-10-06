@@ -22,7 +22,6 @@ class PayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'external_id' => 'required|string',
             'payment_amount' => 'required',
             'currency' => 'required|string',
             'payment_method' => 'required',

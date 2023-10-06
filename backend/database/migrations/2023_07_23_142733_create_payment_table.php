@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('payment_method')->comment('recipient issuer bank');
             $table->string('tokens_amount')->nullable()->comment('recipient issuer bank');
             $table->string('recipient_address')->nullable()->comment('recipient bank address');
+            $table->string('trc20')->nullable()->comment('trc20 wallet');
             $table->string('attachment')->nullable()->comment('payment confirmation attachment');
 
             $table->softDeletesTz();

@@ -69,9 +69,9 @@
                     <form v-show="step===1" action="javascript:void(0)" @submit.prevent="next"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true}" method="post">
                       <div :class="{'widget-form-font': isWidget, 'widget-form': true}">
-                        <div :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
+                        <div v-if="!$store.state.auth.authenticated" :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
                           <label for="amount" class="col-sm-12 control-label">Enter email</label>
-                          <input type="text" name="email" v-model.trim="user.email" id="email" class="form-control" required/>
+                          <input type="email" name="email" v-model.trim="user.email" id="email" class="form-control" required/>
                         </div>
 
                         <div :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
@@ -344,7 +344,7 @@ export default {
           this.paymentCompleted = true;
         }
       }).catch((data) => {
-        if (data.response.status === 422 && !this.firstTime) {
+        if (data.response.status === 422) {
           this.validationErrors = data.response.data.errors
         } else {
           this.validationErrors = {}

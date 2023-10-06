@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class TelegramService
 {
-    public const API_KEY = '6029959387:AAHbu8hf9I6dchvxV-Ifx-ldyY4BqdlFxhg';
+    public const API_KEY = '6379226128:AAFdsoNwol7uvuDN7SV9-BMIcc7x6NgqUt4';
 
     protected $url;
     protected $chatIds;
