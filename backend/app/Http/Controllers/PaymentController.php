@@ -51,9 +51,7 @@ class PaymentController extends Controller
             try {
                 /** @var RegistrationDto $registrationDto */
                 /** @var Payment $payment */
-                $payment = \DB::transaction(function () use ($request) {
-                    return auth()->user()->payments()->create($this->getData($request));
-                });
+                $payment = auth()->user()->payments()->create($this->getData($request));
             } catch (\Throwable $exception) {
                 abort(422, $exception->getMessage());
             }
