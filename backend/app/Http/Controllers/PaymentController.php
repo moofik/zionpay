@@ -10,6 +10,7 @@ use App\Service\MoneyConverter;
 use App\Service\PaymentMessage;
 use App\Service\TelegramService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 class PaymentController extends Controller
@@ -18,53 +19,58 @@ class PaymentController extends Controller
 
     public function payAndRegister(PayAndRegisterRequest $request)
     {
-        try {
-            /** @var RegistrationDto $registrationDto */
-            $transactionDto = \DB::transaction(function () use ($request) {
-                $registrationDto = $this->registerUser($request, random_int(100, 1000000));
-                $payment = $registrationDto->user->payments()->create($this->getData($request));
+        return DB::transaction(function () use ($request) {
+            try {
+                /** @var RegistrationDto $registrationDto */
+                $transactionDto = \DB::transaction(function () use ($request) {
+                    $registrationDto = $this->registerUser($request, random_int(100, 1000000));
+                    $payment = $registrationDto->user->payments()->create($this->getData($request));
 
-                return ['dto' => $registrationDto, 'payment' => $payment];
-            });
-        } catch (\Throwable $exception) {
-            abort(422, $exception->getMessage());
-        }
+                    return ['dto' => $registrationDto, 'payment' => $payment];
+                });
+            } catch (\Throwable $exception) {
+                abort(422, $exception->getMessage());
+            }
 
-        $registrationDto = $transactionDto['dto'];
-        /** @var Payment $payment */
-        $payment = $transactionDto['payment'];
-        $paymentMessage = new PaymentMessage($payment->user, $payment);
-        $tgService = new TelegramService([131231613, 463609933, 6138432791]);
-        $tgService->send($paymentMessage);
+            $registrationDto = $transactionDto['dto'];
+            /** @var Payment $payment */
+            $payment = $transactionDto['payment'];
+            $paymentMessage = new PaymentMessage($payment->user, $payment);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791]);
+            $tgService->send($paymentMessage);
 
-        return response()->json([
-            'access_token'   => $registrationDto->token->plainTextToken,
-            'token_type'     => 'Bearer',
-            'payment_status' => 'success',
-            'payment_id' => $payment->id,
-        ]);
+            return response()->json([
+                'access_token'   => $registrationDto->token->plainTextToken,
+                'token_type'     => 'Bearer',
+                'payment_status' => 'success',
+                'payment_id' => $payment->id,
+            ]);
+        });
+
     }
 
     public function pay(PayRequest $request)
     {
-        try {
-            /** @var RegistrationDto $registrationDto */
-            /** @var Payment $payment */
-            $payment = \DB::transaction(function () use ($request) {
-                return auth()->user()->payments()->create($this->getData($request));
-            });
-        } catch (\Throwable $exception) {
-            abort(422, $exception->getMessage());
-        }
+        return DB::transaction(function () use ($request) {
+            try {
+                /** @var RegistrationDto $registrationDto */
+                /** @var Payment $payment */
+                $payment = \DB::transaction(function () use ($request) {
+                    return auth()->user()->payments()->create($this->getData($request));
+                });
+            } catch (\Throwable $exception) {
+                abort(422, $exception->getMessage());
+            }
 
-        $paymentMessage = new PaymentMessage($payment->user, $payment);
-        $tgService = new TelegramService([131231613, 463609933, 6138432791]);
-        $tgService->send($paymentMessage);
+            $paymentMessage = new PaymentMessage($payment->user, $payment);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791]);
+            $tgService->send($paymentMessage);
 
-        return response()->json([
-            'payment_status' => 'success',
-            'payment_id' => $payment->id,
-        ]);
+            return response()->json([
+                'payment_status' => 'success',
+                'payment_id' => $payment->id,
+            ]);
+        });
     }
 
     /**
