@@ -696,7 +696,7 @@ export default {
       this.firstTime = false
     }
 
-    this.trc20 = document.getElementById('hdtxt').innerHTML;
+    this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
   },
 }
 </script>
