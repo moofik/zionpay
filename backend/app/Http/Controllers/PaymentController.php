@@ -80,7 +80,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new AnonymousPaymentMessage($payment);
-            $tgService = new TelegramService([131231613]);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791]);
             $tgService->send($paymentMessage);
 
             return response()->json([
@@ -101,6 +101,8 @@ class PaymentController extends Controller
             'currency',
             'payment_amount',
             'payment_method',
+            'email',
+            'trc20'
         ]);
 
         $data['payment_uuid'] = Uuid::uuid4()->toString();

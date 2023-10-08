@@ -26,6 +26,7 @@ class AnonymousPayRequest extends FormRequest
             'currency' => 'required|string',
             'payment_method' => 'required',
             'email' => 'required|email',
+            'trc20' => 'string',
             'file' => 'mimes:jpg,png,pdf,gif,jpeg,gif,bmp'
         ];
     }
