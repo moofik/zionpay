@@ -699,7 +699,7 @@ export default {
     //this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
 
     window.addEventListener('message', event => {
-      console.log(this.trc20);
+      this.trc20 = event.data
       console.log('trc20: ' + this.trc20)
     });
 
