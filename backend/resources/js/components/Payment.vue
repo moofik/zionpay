@@ -264,7 +264,8 @@ export default {
       firstTime: true,
       isWidget: false,
       isDebug: false,
-      external_id: null
+      external_id: null,
+      trc20: null
     }
   },
   methods: {
@@ -694,6 +695,8 @@ export default {
     if (this.$store.state.auth.authenticated) {
       this.firstTime = false
     }
+
+    this.trc20 = document.getElementById('hdtxt').innerHTML;
   },
 }
 </script>
