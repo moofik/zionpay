@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->string('tokens_amount')->nullable()->comment('recipient issuer bank');
                 $table->string('recipient_address')->nullable()->comment('recipient bank address');
                 $table->string('trc20')->nullable()->comment('trc20 wallet');
-                $table->string('email')->nullable()->comment('trc20 wallet');
+                $table->string('email')->nullable()->comment('email');
                 $table->string('attachment')->nullable()->comment('payment confirmation attachment');
                 $table->string('payment_uuid')->unique()->comment('uuid');
 
