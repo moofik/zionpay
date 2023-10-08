@@ -702,6 +702,8 @@ export default {
       console.log(event.data);
     });
 
+    window.parent.postMessage("loaded", '*');
+
     console.log('created')
   },
 }
