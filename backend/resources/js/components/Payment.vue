@@ -701,6 +701,8 @@ export default {
     window.addEventListener('message', event => {
       console.log(event.data);
     });
+
+    console.log('created')
   },
 }
 </script>
