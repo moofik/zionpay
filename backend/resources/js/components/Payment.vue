@@ -5,9 +5,18 @@
         <div class="col-xl-10">
           <div :class="{'rounded-3': true, 'text-black': true, 'card-background': true, 'row': true}">
             <div class="support text-end me-4 col-sm">
-              <a href="https://t.me/MIXPAY_SUPPORT" target="_blank" class="btn button-support btn-block fa-lg me-2 gradient-custom-2">Support</a>
-              <button v-if="$store.state.auth.authenticated" class="btn button-support btn-block fa-lg me-2 gradient-custom-2"
-                      @click="logout">Logout
+              <a href="https://t.me/MIXPAY_SUPPORT" target="_blank" class="btn button-support btn-block fa-lg me-2 gradient-custom-2">{{ $t('support') }}</a>
+              <button :class="{'btn': true,
+               'button-support': $i18n.locale !== 'en',
+               'button-support-active': $i18n.locale === 'en',
+               'btn-block': true, 'fa-lg': true, 'me-2': true, 'gradient-custom-2': true}"
+                      @click="enLocale">EN
+              </button>
+              <button :class="{'btn': true,
+               'button-support': $i18n.locale !== 'ru',
+               'button-support-active': $i18n.locale === 'ru',
+               'btn-block': true, 'fa-lg': true, 'me-2': true, 'gradient-custom-2': true}"
+                      @click="ruLocale">RU
               </button>
             </div>
           </div>
@@ -64,52 +73,53 @@
                     </div>
                   </div>
 
-                  <h2 v-show="step===1" class="col widget-step-new" v-if="isWidget">Payment details</h2>
+                  <h2 v-show="step===1" class="col widget-step-new" v-if="isWidget">{{$t('payment_details')}}</h2>
                   <transition name="slide-fade">
                     <form v-show="step===1" action="javascript:void(0)" @submit.prevent="next"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true}" method="post">
                       <div :class="{'widget-form-font': isWidget, 'widget-form': true}">
-                        <div v-if="!$store.state.auth.authenticated" :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
-                          <label for="amount" class="col-sm-12 control-label">Enter email</label>
+                        <div :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
+                          <label for="amount" class="col-sm-12 control-label">{{$t('email')}}</label>
                           <input type="email" name="email" v-model.trim="user.email" id="email" class="form-control" required/>
                         </div>
 
                         <div :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
-                          <label for="issuer" class="col-sm-12 control-label">Select payment method</label>
+                          <label for="issuer" class="col-sm-12 control-label">{{$t('payment_method')}}</label>
                           <select required name="issuer" id="issuer"
                                   class="form-select" v-model="issuer">
                             <option value="" disabled>
-                              Bank transfer (Russia):
+                              {{$t('bank_transfer_rus')}}
                             </option>
                             <option value="Sberbank">
-                              Sberbank
+                              {{$t('sberbank')}}
                             </option>
                             <option value="Tinkoff Bank">
-                              Tinkoff Bank
+                              {{$t('tinkoff')}}
                             </option>
                             <option value="Raiffeisen Bank">
-                              Raiffeisen Bank
+                              {{$t('reiffeisen')}}
                             </option>
                             <option value="RSHB">
-                              RSHB
+                              {{$t('rshb')}}
                             </option>
                             <option value="BKS">
-                              BKS
+                              {{$t('bks')}}
                             </option>
                             <option value="SBP">
-                              SBP System Fast Payas
+                              {{$t('sbp')}}
                             </option>
                           </select>
                         </div>
 
                         <div v-show="issuer !== null && donation_type !== null" :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
-                          <label for="amount" class="col-sm-12 control-label">Enter {{ this.currency }} amount</label>
+                          <label for="amount" class="col-sm-12 control-label">{{ $t('amt', {currency: this.currency})}}</label>
                           <input type="number" step="0.000000001" name="amount" v-model.number="amount" id="amount" class="form-control"/>
                         </div>
                       </div>
 
                       <div class="text-center pt-1 mb-5 pb-1">
                         <button v-show="amount !== null" type="submit" :disabled="processing"
+                                :class="{'en': this.$i18n.locale === 'en', 'ru': this.$i18n.locale === 'ru'}"
                                 class="button-next btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +134,7 @@
                     </form>
                   </transition>
 
-                  <h2 v-show="step===paymentRequisitesStep" class="col widget-step-new requisites-step-new" v-if="isWidget">Payment details</h2>
+                  <h2 v-show="step===paymentRequisitesStep" class="col widget-step-new requisites-step-new" v-if="isWidget">{{$t('payment_details_2')}}</h2>
                   <transition name="slide-fade">
                     <form v-if="step===paymentRequisitesStep" action="javascript:void(0)" @submit.prevent="next"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true, 'widget-form-font': isWidget}" method="post">
@@ -143,6 +153,7 @@
                         </button>
                         &nbsp;
                         <button type="submit" :disabled="processing"
+                                :class="{'en': this.$i18n.locale === 'en', 'ru': this.$i18n.locale === 'ru'}"
                                 class="button-next btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -156,14 +167,14 @@
                     </form>
                   </transition>
 
-                  <h2 v-show="step===paymentConfirmationStep" class="col widget-step-new" v-if="isWidget">Payment confirmation</h2>
+                  <h2 v-show="step===paymentConfirmationStep" class="col widget-step-new" v-if="isWidget">{{$t('confirmation')}}</h2>
                   <transition name="slide-fade">
                     <form ref="addImageForm" v-show="step===paymentConfirmationStep" action="javascript:void(0)"
                           @submit.prevent="pay"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true, 'widget-form-font': isWidget}" method="post">
 
                       <div class="confirmation-form-inner">
-                        <strong class="d-block pb-4">Attach a receipt confirming the payment:</strong>
+                        <strong class="d-block pb-4">{{$t('receipt')}}:</strong>
                         <input required type="file" ref="fileupload" class="form-control" v-on:change="onFileChange"/>
                       </div>
 
@@ -179,6 +190,7 @@
                         </button>
                         &nbsp;
                         <button type="submit" :disabled="processing"
+                                :class="{'en': this.$i18n.locale === 'en', 'ru': this.$i18n.locale === 'ru'}"
                                 class="button-next-2 btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -194,14 +206,15 @@
 
                   <transition name="slide-fade">
                     <div v-show="step===paymentThanksStep">
-                      <h2 class="col widget-step-new thank-you-step">Thank you for your payment</h2>
+                      <h2 class="col widget-step-new thank-you-step">{{ $t('payment_thanks') }}</h2>
                       <p v-show="payment_id" :class="{'p-4': !isWidget, 'donation-description': true, 'donation-description-mb': !isWidget}">
-                        Your payment id: {{this.payment_id}}
+                        {{$t('payment_id')}}: {{this.payment_id}}
                         <br/>
-                        Payment details and information about your account have been sent to your email address.
+                        <!--Payment details and information about your account have been sent to your email address.-->
                       </p>
                       <div class="text-center pt-1 mb-5 pb-1">
                         <button :disabled="processing" @click="toAuthorizedPayment"
+                                :class="{'en': this.$i18n.locale === 'en', 'ru': this.$i18n.locale === 'ru'}"
                                 class="button-next-3 btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -265,7 +278,7 @@ export default {
       isWidget: false,
       isDebug: false,
       external_id: null,
-      trc20: null
+      trc20: ''
     }
   },
   methods: {
@@ -273,6 +286,14 @@ export default {
       signIn: 'auth/loginWithoutRedirect',
       signOut: "auth/logout"
     }),
+
+    ruLocale() {
+      this.$i18n.locale = 'ru'
+    },
+
+    enLocale() {
+      this.$i18n.locale = 'en'
+    },
 
     async logout() {
       await axios.post('/api/logout').then(({data}) => {
@@ -328,22 +349,20 @@ export default {
       formData.append('file', this.file);
       formData.append('payment_method', this.issuer);
       formData.append('payment_amount', this.amount);
+      formData.append('email', this.user.email);
+
+      if (typeof this.trc20 === 'string' || this.trc20 instanceof String) {
+        formData.append('trc20', this.trc20);
+      }
 
       if (this.currency) {
         formData.append('currency', this.currency);
       }
 
-      if (!this.$store.state.auth.authenticated && this.firstTime) {
-        formData.append('email', this.user.email);
-      }
-
       await axios.post(this.url, formData, config).then(({data}) => {
         this.validationErrors = {}
         this.payment_id = data.payment_id
-        if (!this.$store.state.auth.authenticated && this.firstTime) {
-          this.signIn(data)
-          this.paymentCompleted = true;
-        }
+        this.paymentCompleted = true;
       }).catch((data) => {
         if (data.response.status === 422) {
           this.validationErrors = data.response.data.errors
@@ -435,32 +454,16 @@ export default {
       return window.screen.availWidth <= 540
     },
     paymentRequisitesStep: function () {
-      if (this.$store.state.auth.authenticated && !this.firstTime) {
-        return 2;
-      } else {
-        return 2;
-      }
+      return 2;
     },
     paymentConfirmationStep: function () {
-      if (this.$store.state.auth.authenticated && !this.firstTime) {
-        return 3;
-      } else {
-        return 3;
-      }
+      return 3;
     },
     paymentThanksStep: function () {
-      if (this.$store.state.auth.authenticated && !this.firstTime) {
-        return 4;
-      } else {
-        return 4;
-      }
+      return 4;
     },
     url: function () {
-      if (this.$store.state.auth.authenticated && !this.firstTime) {
-        return '/api/payment';
-      } else {
-        return '/api/payment-register';
-      }
+      return '/api/payment-anonymous';
     },
     requisitesProps: function () {
       let qrAssetDemo = this.asset('/images/1.png')
@@ -672,7 +675,6 @@ export default {
   created() {
     let isWidget = this.$route.query.widget
     let isDebug = this.$route.query.debug
-
     document.getElementById('custom-body').style.backgroundColor = '#091013';
     //document.getElementById('custom-body').style.backgroundSize = '50%';
 
@@ -690,10 +692,6 @@ export default {
 
     if (isDebug === 'true') {
       this.isDebug = true
-    }
-
-    if (this.$store.state.auth.authenticated) {
-      this.firstTime = false
     }
 
     //this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
@@ -1121,14 +1119,29 @@ span[class^="dot-"] {
   padding: 0.7em 2em;
 }
 
+.button-support-active {
+  background: #144626;
+  color: white;
+  font-size: 0.8em;
+  padding: 0.7em 2em;
+}
+
 .button-next {
   position: relative;
   opacity: 0.9;
 }
 
-.button-next::after {
+.en.button-next::after {
   position: absolute;
   content: 'Next';
+  font-size: 1.2em;
+  right: 4em;
+  top: 1em;
+}
+
+.ru.button-next::after {
+  position: absolute;
+  content: 'Далее';
   font-size: 1.2em;
   right: 4em;
   top: 1em;
@@ -1149,7 +1162,16 @@ span[class^="dot-"] {
   opacity: 0.9;
 }
 
-.button-next-2::after {
+.ru.button-next-2::after {
+  position: absolute;
+  content: 'Оплатить';
+  color: #f5e0d1;
+  font-size: 1.2em;
+  right: 3em;
+  top: 1em;
+}
+
+.en.button-next-2::after {
   position: absolute;
   content: 'Pay';
   color: #f5e0d1;
@@ -1173,7 +1195,17 @@ span[class^="dot-"] {
   opacity: 0.9;
 }
 
-.button-next-3::after {
+.ru.button-next-3::after {
+  position: absolute;
+  content: 'Новый платеж';
+  color: #f5e0d1;
+  font-size: 0.9em;
+  right: 2.2em;
+  padding: 0 2em;
+  top: 1.8em;
+}
+
+.en.button-next-3::after {
   position: absolute;
   content: 'Make another payment';
   color: #f5e0d1;

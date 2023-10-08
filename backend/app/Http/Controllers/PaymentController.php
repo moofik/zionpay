@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Dto\RegistrationDto;
+use App\Http\Requests\AnonymousPayRequest;
 use App\Http\Requests\PayAndRegisterRequest;
 use App\Http\Requests\PayRequest;
+use App\Models\AnonymousPayment;
 use App\Models\Payment;
+use App\Service\AnonymousPaymentMessage;
 use App\Service\MoneyConverter;
 use App\Service\PaymentMessage;
 use App\Service\TelegramService;
@@ -58,6 +61,26 @@ class PaymentController extends Controller
 
             $paymentMessage = new PaymentMessage($payment->user, $payment);
             $tgService = new TelegramService([131231613, 463609933, 6138432791]);
+            $tgService->send($paymentMessage);
+
+            return response()->json([
+                'payment_status' => 'success',
+                'payment_id' => $payment->id,
+            ]);
+        });
+    }
+
+    public function payWithoutRegistration(AnonymousPayRequest $request)
+    {
+        return DB::transaction(function () use ($request) {
+            try {
+                $payment = AnonymousPayment::create($this->getData($request));
+            } catch (\Throwable $exception) {
+                abort(422, $exception->getMessage());
+            }
+
+            $paymentMessage = new AnonymousPaymentMessage($payment);
+            $tgService = new TelegramService([131231613]);
             $tgService->send($paymentMessage);
 
             return response()->json([

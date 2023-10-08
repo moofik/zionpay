@@ -37,15 +37,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTokensAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUserId($value)
+ * @property string|null $trc20 trc20 wallet
+ * @property string|null $email trc20 wallet
  * @property string $payment_uuid uuid
- * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaymentUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnonymousPayment whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnonymousPayment wherePaymentUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnonymousPayment whereTrc20($value)
  * @mixin \Eloquent
  */
-class Payment extends Model
+class AnonymousPayment extends Model
 {
     use HasFactory;
 
-    protected $table = 'payments';
+    protected $table = 'anonymous_payments';
 
     /**
      * The attributes that are mass assignable.
@@ -60,7 +64,9 @@ class Payment extends Model
         'recipient_address',
         'attachment',
         'payment_uuid',
-        'email'
+        'email',
+        'trc20',
+        'payment_uuid',
     ];
 
     /**
