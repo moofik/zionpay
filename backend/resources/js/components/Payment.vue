@@ -696,7 +696,7 @@ export default {
       this.firstTime = false
     }
 
-    this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
+    //this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
 
     window.addEventListener('message', event => {
       console.log(event.data);
