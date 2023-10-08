@@ -699,12 +699,9 @@ export default {
     //this.trc20 = window.parent.document.getElementById('hdtxt').innerHTML;
 
     window.addEventListener('message', event => {
-      console.log(event.data);
+      this.trc20 = event.data
+      console.log(this.trc20);
     });
-
-    window.parent.postMessage("loaded", '*');
-
-    console.log('created')
   },
 }
 </script>
