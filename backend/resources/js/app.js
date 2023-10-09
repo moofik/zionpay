@@ -31,7 +31,9 @@ const i18n = createI18n({
             payment_thanks: 'Thank you for your payment',
             receipt: 'Attach a receipt confirming the payment',
             confirmation: 'Payment confirmation',
-            copy_requisites: 'Copy requisites'
+            copy_requisites: 'Copy requisites',
+            calc: 'Calculating how much usdt you will get..',
+            youllget: 'You will get {amt} USDT'
         },
         ru: {
             account_number: 'Счет получателя',
@@ -57,7 +59,9 @@ const i18n = createI18n({
             payment_thanks: 'Платеж был успешно зарегестрирован',
             receipt: 'Прикрепите чек для подтверждения платежа',
             confirmation: 'Подтверждение платежа',
-            copy_requisites: 'Скопировать реквизиты'
+            copy_requisites: 'Скопировать реквизиты',
+            calc: 'Расчет количества получаемых USDT..',
+            youllget: 'Вы получите {amt} USDT'
         },
     }
 })

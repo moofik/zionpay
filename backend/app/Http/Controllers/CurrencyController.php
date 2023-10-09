@@ -11,9 +11,7 @@ class CurrencyController extends Controller
     {
         $moneyConverter = new MoneyConverter(0.1, 0.025);
         $result = $moneyConverter->convert(
-            $request->get('amount'),
-            $request->get('from'),
-            $request->get('type')
+            $request->get('amount')
         );
 
         return response()->json(['result' => $result]);

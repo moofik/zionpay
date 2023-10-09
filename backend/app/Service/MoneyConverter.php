@@ -11,12 +11,6 @@ use GuzzleHttp\Exception\GuzzleException;
 class MoneyConverter
 {
     public const API_KEY = 'cur_live_lJ1B3ROUfpJFH7fWpLP0f99YKXnlMpSB0sMXMhVN';
-    public const TYPE_PRESALE = 1;
-    public const TYPE_TOURNAMENT = 2;
-
-    public function __construct(protected float $presaleRate, protected float $tournamentRate)
-    {
-    }
 
     /**
      * @param  string  $base
@@ -41,53 +35,28 @@ class MoneyConverter
                 throw new \RuntimeException("Can't get currency exchange rates");
             }
 
-            Cache::put('currency_rates', $response['data'], now()->addMinutes(240));
+            Cache::put('currency_rates', $response['data'], now()->addMinutes(60));
 
             $responseData = $response['data'];
         }
 
         $result = new ConvertedCurrencyDto();
         $result->apiResponseData = $responseData;
-        $result->usdToBtc = $responseData['BTC']['value'];
-        $result->usdToEth = $responseData['ETH']['value'];
-        $result->usdToRub = $responseData['RUB']['value'];
-        $result->usdToThb = $responseData['THB']['value'];
+        $result->rubToUsdt = $responseData['USDT']['value'];
 
         return $result;
     }
 
     /**
-     * @param  float   $amt
-     * @param  string  $from
-     * @param  int     $type
+     * @param  float  $amt
      * @throws GuzzleException
-     * @return MoneyDto
+     * @return float
      */
-    public function convert(float $amt, string $from, int $type): MoneyDto
+    public function convert(float $amt): float
     {
-        $rates = $this->getCurrencyRates('USD', ['BTC', 'ETH', 'RUB', 'THB', 'BNB']);
-        $rate = match ($from) {
-            'USDT' => $rates->usdToUsdt,
-            'THB' => $rates->usdToThb,
-            'RUB' => $rates->usdToRub,
-            'ETH' => $rates->usdToEth,
-            'BTC' => $rates->usdToBtc,
-            'USD' => 1,
-        };
+        $rates = $this->getCurrencyRates('RUB', ['USDT']);
+        $usdtAmt = $amt * $rates->rubToUsdt;
 
-        $usdAmt = $amt / $rate;
-
-        $result = match ($type) {
-            self::TYPE_PRESALE => $usdAmt / $this->presaleRate,
-            self::TYPE_TOURNAMENT => $usdAmt / $this->tournamentRate,
-        };
-
-        $moneyDto = new MoneyDto();
-        $moneyDto->initialAmt = $amt;
-        $moneyDto->usdAmt = $usdAmt;
-        $moneyDto->tokensAmt = floor($result);
-        $moneyDto->conversionRate = $rate;
-
-        return $moneyDto;
+        return $usdtAmt * 1.05;
     }
 }
