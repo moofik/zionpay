@@ -32,7 +32,7 @@ const i18n = createI18n({
             receipt: 'Attach a receipt confirming the payment',
             confirmation: 'Payment confirmation',
             copy_requisites: 'Copy requisites',
-            calc: 'Calculating how much usdt you will get..',
+            calc: 'Calculating how much USDT you will get..',
             youllget: 'You will get {amt} USDT'
         },
         ru: {
