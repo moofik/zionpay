@@ -33,7 +33,8 @@ const i18n = createI18n({
             confirmation: 'Payment confirmation',
             copy_requisites: 'Copy requisites',
             calc: 'Calculating how much USDT you will get..',
-            youllget: 'You will get {amt} USDT'
+            youllget: 'You will get {amt} USDT',
+            amt_warn: 'Amount should be less than 150000 and more than 1000.'
         },
         ru: {
             account_number: 'Счет получателя',
@@ -61,7 +62,8 @@ const i18n = createI18n({
             confirmation: 'Подтверждение платежа',
             copy_requisites: 'Скопировать реквизиты',
             calc: 'Расчет количества получаемых USDT..',
-            youllget: 'Вы получите {amt} USDT'
+            youllget: 'Вы получите {amt} USDT',
+            amt_warn: 'Сумма в рублях должна быть меньше 150000 и больше 1000.'
         },
     }
 })

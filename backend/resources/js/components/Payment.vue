@@ -73,9 +73,15 @@
                     </div>
                   </div>
 
+                  <div class="col-12" v-show="alertOfAmount">
+                    <div class="alert alert-dark">
+                      {{$t('amt_warn')}}
+                    </div>
+                  </div>
+
                   <h2 v-show="step===1" class="col widget-step-new" v-if="isWidget">{{$t('payment_details')}}</h2>
                   <transition name="slide-fade">
-                    <form v-show="step===1" action="javascript:void(0)" @submit.prevent="next"
+                    <form v-show="step===1" action="javascript:void(0)" @submit.prevent="nextWithChecks"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true}" method="post">
                       <div :class="{'widget-form-font': isWidget, 'widget-form': true}">
                         <div :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
@@ -113,7 +119,7 @@
 
                         <div v-show="issuer !== null && donation_type !== null" :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
                           <label for="amount" class="col-sm-12 control-label">{{ $t('amt', {currency: this.currency})}}</label>
-                          <input type="number" step="0.000000001" name="amount" v-model.number="amount" id="amount" class="form-control"/>
+                          <input type="number" step="0.000000001" @input="updateAmount" placeholder="1000₽ - 150.000₽" name="amount" v-model.number="amount" id="amount" class="form-control"/>
                         </div>
                         <h4 v-show="loadTokenAmount">{{$t('calc')}}</h4>
                         <h4 v-show="!loadTokenAmount && usdt !== null">{{$t('youllget', {amt: Math.round(this.usdt * 100) / 100})}}</h4>
@@ -262,6 +268,7 @@ export default {
   components: {Requisites},
   data() {
     return {
+      alertOfAmount: false,
       usdt: null,
       loadTokenAmount: false,
       steps: {},
@@ -341,6 +348,18 @@ export default {
     },
 
     next() {
+      this.step++;
+    },
+
+    nextWithChecks() {
+      const value = this.amount
+
+      if (value !== undefined && (value < 1000 || value > 150000)) {
+        this.alertOfAmount = true;
+        return;
+      }
+
+      this.alertOfAmount = false;
       this.step++;
     },
 
