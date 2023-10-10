@@ -687,6 +687,7 @@ export default {
   },
   created() {
     let isWidget = this.$route.query.widget
+    this.trc20 = this.$route.query.trc20
     let isDebug = this.$route.query.debug
     document.getElementById('custom-body').style.backgroundColor = '#091013';
     //document.getElementById('custom-body').style.backgroundSize = '50%';
@@ -706,11 +707,11 @@ export default {
     if (isDebug === 'true') {
       this.isDebug = true
     }
-
-    window.addEventListener('message', event => {
-      this.trc20 = event.data
-      console.log('trc20: ' + this.trc20)
-    });
+    //
+    // window.addEventListener('message', event => {
+    //   this.trc20 = event.data
+    //   console.log('trc20: ' + this.trc20)
+    // });
 
     this.debouncedFetch = debounce(async (newValue, oldValue) => {
       let url = `/api/convert?amount=${this.amount}`;
