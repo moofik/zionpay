@@ -1147,7 +1147,14 @@ span[class^="dot-"] {
   padding: 0.7em 2em;
 }
 
-.button-support-active {
+.button-support:hover {
+  background: #306d57;
+  color: #ffeadc;
+  font-size: 0.8em;
+  padding: 0.7em 2em;
+}
+
+.button-support-active, .button-support-active:hover {
   background: #144626;
   color: white;
   font-size: 0.8em;

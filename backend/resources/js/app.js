@@ -5,7 +5,7 @@ import {createApp} from 'vue/dist/vue.esm-bundler';
 import { createI18n } from 'vue-i18n'
 
 const i18n = createI18n({
-    locale: 'en',
+    locale: 'ru',
     messages: {
         en: {
             account_number: 'Account number',
