@@ -55,8 +55,8 @@ class MoneyConverter
     public function convert(float $amt): float
     {
         $rates = $this->getCurrencyRates('RUB', ['USDT']);
-        $usdtAmt = $amt * $rates->rubToUsdt;
+        $usdtAmt = $amt / $rates->rubToUsdt;
 
-        return $usdtAmt * 0.93;
+        return $usdtAmt * 1.07;
     }
 }

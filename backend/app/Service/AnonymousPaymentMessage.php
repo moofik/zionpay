@@ -22,7 +22,10 @@ class AnonymousPaymentMessage implements MessageInterface
         if ($this->payment->payment_amount < 1) {
             $amt = rtrim(number_format($amt, 10), '0');
         }
-        $paymentMessage .= "Количество: " . $amt . "\n";
+        $converter = new MoneyConverter();
+        $rubAmt = round($converter->convert($amt));
+        $paymentMessage .= "Количество в USDT: " . $amt . "\n";
+        $paymentMessage .= 'Количество в РУБ: ' . $rubAmt . "\n";
         $link = "storage/uploads/" . $this->payment->attachment;
         $paymentMessage .= "Ссылка на подтверждение оплаты: " . \URL::to($link) . "\n";
 

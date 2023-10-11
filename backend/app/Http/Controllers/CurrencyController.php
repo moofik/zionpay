@@ -10,9 +10,9 @@ class CurrencyController extends Controller
     public function convert(Request $request)
     {
         $moneyConverter = new MoneyConverter(0.1, 0.025);
-        $result = $moneyConverter->convert(
+        $result = round($moneyConverter->convert(
             $request->get('amount')
-        );
+        ));
 
         return response()->json(['result' => $result]);
     }

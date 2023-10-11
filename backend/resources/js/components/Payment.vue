@@ -5,7 +5,7 @@
         <div class="col-xl-10">
           <div :class="{'rounded-3': true, 'text-black': true, 'card-background': true, 'row': true}">
             <div class="support text-end me-4 col-sm">
-              <a href="https://t.me/MIXPAY_SUPPORT" target="_blank" class="btn button-support btn-block fa-lg me-2 gradient-custom-2">{{ $t('support') }}</a>
+              <a href="https://t.me/ZION_PAY_HELP" target="_blank" class="btn button-support btn-block fa-lg me-2 gradient-custom-2">{{ $t('support') }}</a>
               <button :class="{'btn': true,
                'button-support': $i18n.locale !== 'en',
                'button-support-active': $i18n.locale === 'en',
@@ -105,12 +105,6 @@
                             <option value="Raiffeisen Bank">
                               {{$t('reiffeisen')}}
                             </option>
-                            <option value="RSHB">
-                              {{$t('rshb')}}
-                            </option>
-                            <option value="BKS">
-                              {{$t('bks')}}
-                            </option>
                             <option value="SBP">
                               {{$t('sbp')}}
                             </option>
@@ -119,16 +113,16 @@
 
                         <div v-show="issuer !== null && donation_type !== null" :class="{'form-outline': true, 'mb-4': !isWidget, 'mb-3': isWidget}">
                           <label for="amount" class="col-sm-12 control-label">{{ $t('amt', {currency: this.currency})}}</label>
-                          <input type="number" step="0.000000001" @input="updateAmount" placeholder="1000₽ - 150.000₽" name="amount" v-model.number="amount" id="amount" class="form-control"/>
+                          <input type="number" step="0.000000001" placeholder="50 USDT - 1500 USDT" name="amount" v-model.number="amount" id="amount" class="form-control"/>
                         </div>
                         <h4 class="usdt-amt" v-show="loadTokenAmount && !alertOfAmount">{{$t('calc')}}</h4>
-                        <h4 class="usdt-amt" v-show="!loadTokenAmount && !alertOfAmount && usdt !== null">{{$t('youllget', {amt: Math.round(this.usdt * 100) / 100})}}</h4>
+                        <h4 class="usdt-amt" v-show="!loadTokenAmount && !alertOfAmount && rubAmt !== null">{{$t('youllget', {amt: this.rubAmt})}}</h4>
                         <h4 class="usdt-amt" v-show="alertOfAmount">{{$t('amt_warn')}}</h4>
                       </div>
 
 
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button v-show="amount !== null" type="submit" :disabled="processing"
+                        <button v-show="amount !== null" type="submit" :disabled="loadTokenAmount"
                                 :class="{'en': this.$i18n.locale === 'en', 'ru': this.$i18n.locale === 'ru'}"
                                 class="button-next btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
@@ -278,6 +272,7 @@ export default {
       currency: null,
       issuer: null,
       amount: null,
+      rubAmt: null,
       payment_id: null,
       file: null,
       user: {
@@ -355,7 +350,7 @@ export default {
     nextWithChecks() {
       const value = this.amount
 
-      if (value !== undefined && (value < 1000 || value > 150000)) {
+      if (value !== undefined && (value < 50 || value > 1500)) {
         this.alertOfAmount = true;
         return;
       }
@@ -412,7 +407,7 @@ export default {
         this.loadTokenAmount = true;
       }
 
-      if (newValue !== undefined && newValue !== null && (newValue < 1000 || newValue > 150000)) {
+      if (newValue !== undefined && newValue !== null && (newValue < 50 || newValue > 1500)) {
         this.alertOfAmount = true;
         return;
       } else {
@@ -708,7 +703,7 @@ export default {
 
       data['issuer'] = this.issuer
       data['currency'] = this.currency
-      data['amount'] = this.amount
+      data['amount'] = this.rubAmt
 
       return data
     }
@@ -746,7 +741,7 @@ export default {
 
       await axios.get(url).then(({data}) => {
         this.loadTokenAmount = false;
-        this.usdt = data.result;
+        this.rubAmt = data.result;
       }).catch(({data}) => {
         if (data.status === 422) {
           this.loadTokenAmount = false;
