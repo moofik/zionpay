@@ -522,8 +522,8 @@ export default {
 
         case "Sberbank":
           data = {
-            number: '2202-2036-6197-5724',
-            name: 'Иван Васильевич Д.'
+            number: '2202 2013 3064 4069',
+            name: 'Денис И.'
           }
           break;
 
