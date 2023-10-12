@@ -13,7 +13,7 @@
 
   <div class="donation-requisites">
     <div class="donation-description-2 d-inline-block">
-      <p><span>{{$t('account_number')}}:</span> <span>{{number}}</span></p>
+      <p><span>{{$t('account_number')}}:</span> <span>{{number}}</span><span>&nbsp;{{bank}}</span></p>
       <p v-if="name"><span>{{$t('payee_name')}}:</span> {{name}}</p>
       <a class="copy-btn" href="#" @click="copyText">{{$t('copy_requisites')}}</a>
     </div>
@@ -65,6 +65,12 @@ export default {
       type: String,
       required: false,
       default: null
+    },
+
+    bank: {
+      type: String,
+      required: false,
+      default: ''
     },
 
     name: {
