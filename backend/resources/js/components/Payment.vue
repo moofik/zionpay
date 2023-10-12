@@ -250,6 +250,8 @@
 import {mapActions} from 'vuex'
 import Requisites from "@/components/Payment/Requisites.vue";
 
+let controller = new AbortController();
+
 function debounce(fn, wait) {
   let timer;
   return function (...args) {
@@ -293,7 +295,8 @@ export default {
       isWidget: false,
       isDebug: false,
       external_id: null,
-      trc20: ''
+      trc20: '',
+      ongoingRequest: false
     }
   },
   methods: {
@@ -410,6 +413,13 @@ export default {
   },
   watch: {
     async amount(newValue, oldValue) {
+
+      if (this.ongoingRequest) {
+        controller.abort()
+        controller = new AbortController()
+        this.ongoingRequest = false
+      }
+
       if (newValue !== null && newValue > 0) {
         this.loadTokenAmount = true;
       }
@@ -739,8 +749,10 @@ export default {
 
     this.debouncedFetch = debounce(async (newValue, oldValue) => {
       let url = `/api/convert?amount=${this.amount}`;
+      this.ongoingRequest = true;
 
-      await axios.get(url).then(({data}) => {
+      await axios.get(url, {signal: controller.signal}).then(({data}) => {
+        this.ongoingRequest = false;
         this.loadTokenAmount = false;
         this.rubAmt = data.result;
       }).catch(({data}) => {
