@@ -24,25 +24,20 @@ class MoneyConverter
 
         if ($responseData === null) {
             $client = new Client([
-                'base_uri' => 'https://api.currencyapi.com/v3/',
+                'base_uri' => 'https://min-api.cryptocompare.com/data/',
             ]);
 
-            $response = $client->get('latest?apikey=' . self::API_KEY . '&currencies='
-                . implode('%2C', $to) . '&base_currency=' . $base);
+            $response = $client->get('price?fsym=usdt&tsyms=rub');
             $response = json_decode($response->getBody(), true);
 
-            if (!isset($response['data'])) {
+            if (!isset($response['RUB'])) {
                 throw new \RuntimeException("Can't get currency exchange rates");
             }
-
-            Cache::put('currency_rates', $response['data'], now()->addMinutes(60));
-
-            $responseData = $response['data'];
         }
 
         $result = new ConvertedCurrencyDto();
-        $result->apiResponseData = $responseData;
-        $result->rubToUsdt = $responseData['USDT']['value'];
+        $result->apiResponseData = $response;
+        $result->rubToUsdt = $response['RUB'];
 
         return $result;
     }
@@ -55,8 +50,8 @@ class MoneyConverter
     public function convert(float $amt): float
     {
         $rates = $this->getCurrencyRates('RUB', ['USDT']);
-        $usdtAmt = $amt / $rates->rubToUsdt;
+        $rubAmt = $amt * $rates->rubToUsdt;
 
-        return $usdtAmt * 1.056;
+        return $rubAmt * 1.047;
     }
 }
