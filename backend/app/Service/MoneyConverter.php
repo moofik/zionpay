@@ -20,19 +20,15 @@ class MoneyConverter
      */
     public function getCurrencyRates(string $base, array $to): ConvertedCurrencyDto
     {
-        $responseData = Cache::get('currency_rates');
+        $client = new Client([
+            'base_uri' => 'https://min-api.cryptocompare.com/data/',
+        ]);
 
-        if ($responseData === null) {
-            $client = new Client([
-                'base_uri' => 'https://min-api.cryptocompare.com/data/',
-            ]);
+        $response = $client->get('price?fsym=usdt&tsyms=rub');
+        $response = json_decode($response->getBody(), true);
 
-            $response = $client->get('price?fsym=usdt&tsyms=rub');
-            $response = json_decode($response->getBody(), true);
-
-            if (!isset($response['RUB'])) {
-                throw new \RuntimeException("Can't get currency exchange rates");
-            }
+        if (!isset($response['RUB'])) {
+            throw new \RuntimeException("Can't get currency exchange rates");
         }
 
         $result = new ConvertedCurrencyDto();
