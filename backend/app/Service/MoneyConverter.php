@@ -48,6 +48,6 @@ class MoneyConverter
         $rates = $this->getCurrencyRates('RUB', ['USDT']);
         $rubAmt = $amt * $rates->rubToUsdt;
 
-        return $rubAmt * 1.047;
+        return $rubAmt * 1.069;
     }
 }
