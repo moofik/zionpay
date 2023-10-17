@@ -36,7 +36,7 @@ class PaymentController extends Controller
             /** @var Payment $payment */
             $payment = $transactionDto['payment'];
             $paymentMessage = new PaymentMessage($registrationDto->user, $payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847]);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299]);
             $tgService->send($paymentMessage);
 
             return response()->json([
@@ -60,7 +60,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new PaymentMessage($payment->user, $payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847]);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299]);
             $tgService->send($paymentMessage);
 
             return response()->json([
@@ -80,7 +80,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new AnonymousPaymentMessage($payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847]);
+            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299]);
             $tgService->send($paymentMessage);
 
             return response()->json([
