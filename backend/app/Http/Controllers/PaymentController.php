@@ -80,7 +80,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new AnonymousPaymentMessage($payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299]);
+            $tgService = new TelegramService([131231613]);
             $tgService->send($paymentMessage);
 
             return response()->json([

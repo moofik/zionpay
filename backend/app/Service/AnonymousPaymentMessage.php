@@ -26,8 +26,8 @@ class AnonymousPaymentMessage implements MessageInterface
         $rubAmt = round($converter->convert($amt));
         $paymentMessage .= "Количество в USDT: " . $amt . "\n";
         $paymentMessage .= 'Количество в РУБ: ' . $rubAmt . "\n";
-        $link = "storage/uploads/" . $this->payment->attachment;
-        $paymentMessage .= "Ссылка на подтверждение оплаты: " . \URL::to($link) . "\n";
+        //$link = "storage/uploads/" . $this->payment->attachment;
+        //$paymentMessage .= "Ссылка на подтверждение оплаты: " . \URL::to($link) . "\n";
 
         return $paymentMessage;
     }

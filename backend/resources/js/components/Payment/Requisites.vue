@@ -25,9 +25,9 @@
 <!--    <p class="donation-description-3 d-inline-block">-->
 <!--      If needed, you can leave a comment for the payment.-->
 <!--    </p>-->
-    <p class="donation-description-4 d-inline-block">
-      {{$t('req_attention')}}
-    </p>
+<!--    <p class="donation-description-4 d-inline-block">-->
+<!--      {{$t('req_attention')}}-->
+<!--    </p>p-->
   </div>
 </template>
 
