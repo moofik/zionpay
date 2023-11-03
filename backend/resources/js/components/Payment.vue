@@ -171,7 +171,7 @@
 
 <!--                        </button>-->
 <!--                      </div>-->
-                      <div class="text-center pt-1 mb-5 pb-1">
+                      <div class="text-center pt-1 mb-5 pb-1 payment-button-container">
                         <button v-show="!processing" type="button" @click="prev" :disabled="processing"
                                 class="button-prev btn btn-block fa-lg gradient-custom-2 mb-3">
                           <svg
@@ -1376,6 +1376,16 @@ input[type=file]::file-selector-button:hover {
   border-radius: 2em;
 }
 
+.payment-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .button-next-2 {
+    font-size: 12px;
+  }
+}
 
 @media (min-width: 540px) {
   .section-form .widget-step-new {

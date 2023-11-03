@@ -260,7 +260,7 @@ p:last-child {
 }
 
 .donation-requisites {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
