@@ -96,17 +96,8 @@
                             <option value="" disabled>
                               {{$t('bank_transfer_rus')}}
                             </option>
-                            <option value="Sberbank">
-                              {{$t('sberbank')}}
-                            </option>
-                            <option value="Tinkoff Bank">
+                            <option selected value="Tinkoff Bank">
                               {{$t('tinkoff')}}
-                            </option>
-                            <option value="Raiffeisen Bank">
-                              {{$t('reiffeisen')}}
-                            </option>
-                            <option value="SBP">
-                              {{$t('sbp')}}
                             </option>
                           </select>
                         </div>
