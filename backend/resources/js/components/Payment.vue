@@ -300,7 +300,7 @@ export default {
       step: 1,
       donation_type: 1,
       currency: null,
-      issuer: null,
+      issuer: 'Tinkoff Bank',
       amount: null,
       rubAmt: null,
       payment_id: null,
