@@ -408,9 +408,7 @@ export default {
         formData.append('trc20', this.trc20);
       }
 
-      if (this.currency) {
-        formData.append('currency', this.currency);
-      }
+      formData.append('currency', 'RUB');
 
       await axios.post(this.url, formData, config).then(({data}) => {
         this.validationErrors = {}
