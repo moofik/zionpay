@@ -345,7 +345,7 @@ export default {
     toAuthorizedPayment() {
       this.steps = {}
       this.step = 1
-      this.currency = null
+      this.currency = 'RUB'
       this.issuer = null
       this.amount = null
       this.file = null
