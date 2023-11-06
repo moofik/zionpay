@@ -453,73 +453,7 @@ export default {
       }
 
       this.debouncedFetch(newValue, oldValue);
-    },
-    issuer(newValue, oldValue) {
-      switch (newValue) {
-        case "Kasikorn Bank":
-        case "True Wallet":
-          this.currency = 'THB'
-          break
-
-        case "Sberbank":
-        case "Tinkoff Bank":
-        case "Raiffeisen Bank":
-        case "RSHB":
-        case "BKS":
-        case "SBP":
-        case "ЮMoney":
-          this.currency = 'RUB'
-          break
-
-        case "Jusan Bank":
-        case "Halyk Bank":
-        case "Kaspi.kz":
-        case "BCC.KZ":
-        case "Bereke Bank":
-          this.currency = 'KZT'
-          break
-
-        case "BNB":
-        case "EGRIP":
-          this.currency = 'BYN'
-          break
-
-        case "Ziraat Bank (EUR)":
-          this.currency = 'EUR'
-          break
-        case "Ziraat Bank (USD)":
-          this.currency = 'USD'
-          break
-        case "Ziraat Bank (TRY)":
-          this.currency = 'TRY'
-          break
-
-        case "MayBank (IDR)":
-          this.currency = 'IDR'
-          break
-        case "MayBank (USD)":
-          this.currency = 'USD'
-          break
-
-        case "Bitcoin":
-          this.currency = 'BTC'
-          break
-
-        case "Ethereum ERC20":
-          this.currency = 'ETH'
-          break
-
-        case "USDT Tether BEP20":
-        case "USDT Tether TRC20":
-        case "USDT Tether ERC20":
-          this.currency = 'USDT'
-          break
-
-        default:
-          this.currency = null
-          break
-      }
-    },
+    }
   },
   computed: {
     isMobile: function () {
