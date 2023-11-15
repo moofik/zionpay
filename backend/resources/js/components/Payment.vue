@@ -99,6 +99,12 @@
                             <option selected value="Tinkoff Bank">
                               {{$t('tinkoff')}}
                             </option>
+                            <option selected value="Tinkoff Bank">
+                              {{$t('tinkoff')}}
+                            </option>
+                            <option value="SBP">
+                              {{$t('sbp')}}
+                            </option>
                           </select>
                         </div>
 
