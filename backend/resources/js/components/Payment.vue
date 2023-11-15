@@ -497,8 +497,8 @@ export default {
 
         case "Tinkoff Bank":
           data = {
-            number: '2200-7001-7704-5027',
-            name: 'Анна Анатольевна Ч.'
+            number: '2200 7009 5236 2787',
+            name: 'Михаил Р.'
           }
           break;
 
@@ -525,9 +525,9 @@ export default {
 
         case "SBP":
           data = {
-            number: '+79871050858',
-            bank: 'СБЕРБАНК',
-            name: 'Денис И.'
+            number: '+79224172005',
+            bank: 'Тинькофф',
+            name: 'Михаил Р.'
           }
           break;
 
