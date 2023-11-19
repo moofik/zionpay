@@ -15,7 +15,9 @@
     <div class="donation-description-2 d-inline-block">
       <p><span>{{$t('account_number')}}:</span> <span>{{number}}</span><span>&nbsp;{{bank}}</span></p>
       <p v-if="name"><span>{{$t('payee_name')}}:</span> {{name}}</p>
-      <a class="copy-btn" href="#" @click="copyText">{{$t('copy_requisites')}}</a>
+      <a class="copy-btn" href="#" @click="copyText">{{$t('copy_requisites')}}</a><br/><br/>
+      <span class="red_text">Обработка заявок в период 08:00-21:00 Мск до 01:00. <br/>
+Обработка заявок в период с 21:00-08:00 Мск с 12:00.</span>
     </div>
   </div>
   <div v-if="reqimage">
@@ -165,6 +167,11 @@ p:last-child {
   font-size: 0.8em;
   position: relative;
   width: 100%;
+}
+
+.red_text {
+  color: rgba(197, 6, 6, 0.82);
+  font-weight: 700;
 }
 
 .donation-description-1::before {

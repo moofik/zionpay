@@ -302,7 +302,7 @@ export default {
       steps: {},
       step: 1,
       donation_type: 1,
-      currency: null,
+      currency: "RUB",
       issuer: 'Tinkoff Bank',
       amount: null,
       rubAmt: null,
