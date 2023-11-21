@@ -16,8 +16,7 @@
       <p><span>{{$t('account_number')}}:</span> <span>{{number}}</span><span>&nbsp;{{bank}}</span></p>
       <p v-if="name"><span>{{$t('payee_name')}}:</span> {{name}}</p>
       <a class="copy-btn" href="#" @click="copyText">{{$t('copy_requisites')}}</a><br/><br/>
-      <span class="red_text">Обработка заявок в период 08:00-21:00 Мск до 01:00. <br/>
-Обработка заявок в период с 21:00-08:00 Мск с 12:00.</span>
+      <span class="red_text">{{$t('order_processing')}}</span>
     </div>
   </div>
   <div v-if="reqimage">
