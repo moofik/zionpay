@@ -35,7 +35,8 @@ const i18n = createI18n({
             calc: 'Calculating how much RUB it will cost..',
             youllget: 'Cost: {amt} RUB',
             amt_warn: 'USDT amount should be in 50-1500 range.',
-            order_processing: 'Processing of applications during the period 08:00-21:00 Moscow time up to 1 hour. <br/> Processing of applications from 21:00-08:00 Moscow time up to 12 hours.'
+            order_processing_1: 'Processing of applications during the period 08:00-21:00 Moscow time up to 1 hour.',
+            order_processing_2: 'Processing of applications from 21:00-08:00 Moscow time up to 12 hours.',
         },
         ru: {
             account_number: 'Счет получателя',
@@ -65,7 +66,8 @@ const i18n = createI18n({
             calc: 'Расчет стоимости в рублях..',
             youllget: 'Стоимость: {amt} RUB',
             amt_warn: 'Сумма в USDT должна быть от 50 до 1500.',
-            order_processing: 'Обработка заявок в период 08:00-21:00 Мск до 1 часа. <br/> Обработка заявок в период с 21:00-08:00 Мск до 12 часов.'
+            order_processing_1: 'Обработка заявок в период 08:00-21:00 Мск до 1 часа.',
+            order_processing_2: 'Обработка заявок в период с 21:00-08:00 Мск до 12 часов.'
         },
     }
 })

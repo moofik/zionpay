@@ -16,7 +16,7 @@
       <p><span>{{$t('account_number')}}:</span> <span>{{number}}</span><span>&nbsp;{{bank}}</span></p>
       <p v-if="name"><span>{{$t('payee_name')}}:</span> {{name}}</p>
       <a class="copy-btn" href="#" @click="copyText">{{$t('copy_requisites')}}</a><br/><br/>
-      <span class="red_text">{{$t('order_processing')}}</span>
+      <span class="red_text">{{$t('order_processing_1')}}<br/>{{$t('order_processing_2')}}</span>
     </div>
   </div>
   <div v-if="reqimage">
