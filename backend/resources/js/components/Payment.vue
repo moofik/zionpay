@@ -96,8 +96,8 @@
                             <option value="" disabled>
                               {{$t('bank_transfer_rus')}}
                             </option>
-                            <option selected value="Tinkoff Bank">
-                              {{$t('tinkoff')}}
+                            <option selected value="Raiffeisen Bank">
+                              {{$t('reiffeisen')}}
                             </option>
                             <option value="SBP">
                               {{$t('sbp')}}
@@ -507,8 +507,8 @@ export default {
 
         case "Raiffeisen Bank":
           data = {
-            number: '2200-3001-0026-6285',
-            name: 'Иван Васильевич Д.'
+            number: '5379-6530-4019-2518',
+            name: 'Ольга Юрьевна'
           }
           break;
 
@@ -528,9 +528,9 @@ export default {
 
         case "SBP":
           data = {
-            number: '+79224172005',
-            bank: 'Тинькофф',
-            name: 'Михаил Р.'
+            number: '+79090421419',
+            bank: 'Райфайзен',
+            name: 'Ольга Юрьевна'
           }
           break;
 
