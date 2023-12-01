@@ -300,7 +300,8 @@ function constructDataFromApiResponse(apiResponse) {
       bank: item.sbp_bank,
       name: item.requisites,
       ru_name: item.ru_name,
-      en_name: item.en_name
+      en_name: item.en_name,
+      is_selected: item.is_selected
     }
   });
   return result;
@@ -551,7 +552,14 @@ export default {
 
     await axios.get('/api/banks').then(({data}) => {
       this.banks = constructDataFromApiResponse(data)
-    }).catch(({data}) => {
+
+      for (const key in this.banks) {
+        if (this.banks[key].is_selected) {
+          this.issuer = key;
+          break;
+        }
+      }
+    }).catch((data) => {
       console.log(data)
     })
 
