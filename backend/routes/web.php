@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/{vue_capture?}', function () {
     return view('welcome');
-})->where('vue_capture', '(?!api\b)[a-zA-Z0-9]+');
+})->where('vue_capture', '(?!api\b|sadm\b)[a-zA-Z0-9]+');

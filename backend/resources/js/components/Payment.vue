@@ -96,11 +96,14 @@
                             <option value="" disabled>
                               {{$t('bank_transfer_rus')}}
                             </option>
-                            <option selected value="Raiffeisen Bank">
-                              {{$t('reiffeisen')}}
-                            </option>
-                            <option value="SBP">
-                              {{$t('sbp')}}
+<!--                            <option selected value="Raiffeisen Bank">-->
+<!--                              {{$t('reiffeisen')}}-->
+<!--                            </option>-->
+<!--                            <option value="SBP">-->
+<!--                              {{$t('sbp')}}-->
+<!--                            </option>-->
+                            <option v-for="(value, name, index) in banks" :key="name" :value="name">
+                              {{ this.$i18n.locale === 'ru' ? value.ru_name : value.en_name }}
                             </option>
                           </select>
                         </div>
@@ -140,7 +143,7 @@
                           @submit.prevent="pay"
                           :class="{'row': true, 'col-10': !isMobile, 'col-12': isMobile, 'm-auto': true, 'widget-form-font': isWidget}" method="post">
                       <div :class="{'form-outline': true, 'requisites-widget-container': isWidget}">
-                        <Requisites v-bind="requisitesProps"></Requisites>
+                        <Requisites v-if="requisitesProps" v-bind="requisitesProps"></Requisites>
                       </div>
 <!--                      <div class="text-center pt-1 mb-5 pb-1  ">-->
 <!--                        <button type="button" @click="prev" :disabled="processing"-->
@@ -289,6 +292,20 @@ function debounce(fn, wait) {
   }
 }
 
+function constructDataFromApiResponse(apiResponse) {
+  const result = {};
+  apiResponse.forEach(item => {
+    result[item.code] = {
+      number: item.number,
+      bank: item.sbp_bank,
+      name: item.requisites,
+      ru_name: item.ru_name,
+      en_name: item.en_name
+    }
+  });
+  return result;
+}
+
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
@@ -296,6 +313,7 @@ export default {
   components: {Requisites, PulseLoader},
   data() {
     return {
+      banks: {},
       alertOfAmount: false,
       usdt: null,
       loadTokenAmount: false,
@@ -303,7 +321,7 @@ export default {
       step: 1,
       donation_type: 1,
       currency: "RUB",
-      issuer: 'Tinkoff Bank',
+      issuer: null,
       amount: null,
       rubAmt: null,
       payment_id: null,
@@ -476,202 +494,11 @@ export default {
       let qrAssetDemo = this.asset('/images/1.png')
       let data = null;
 
-      switch (this.issuer) {
-        case "Kasikorn Bank":
-          data = {
-            number: '161-8-74206-3',
-            name: 'CRYSTAL X CO., LTD.'
-          }
-          break;
-
-        case "True Wallet":
-          data = {
-            number: '161-8-74206-3',
-            name: 'CRYSTAL X CO., LTD.'
-          }
-          break;
-
-        case "Sberbank":
-          data = {
-            number: '2202 2013 3064 4069',
-            name: 'Денис И.'
-          }
-          break;
-
-        case "Tinkoff Bank":
-          data = {
-            number: '2200 7009 5236 2787',
-            name: 'Михаил Р.'
-          }
-          break;
-
-        case "Raiffeisen Bank":
-          data = {
-            number: '5379-6530-4019-2518',
-            name: 'Ольга Юрьевна'
-          }
-          break;
-
-        case "RSHB":
-          data = {
-            number: '6234-4620-0496-7615',
-            name: 'Антон Олегович Г.'
-          }
-          break;
-
-        case "BKS":
-          data = {
-            number: '2203-6203-2094-5609',
-            name: 'Антон Олегович Г.'
-          }
-          break;
-
-        case "SBP":
-          data = {
-            number: '+79090421419',
-            bank: 'Райфайзен',
-            name: 'Ольга Юрьевна'
-          }
-          break;
-
-        case "ЮMoney":
-          data = {
-            number: '0x5ff12b5b19168ef4c06cabda2dca0bd3bb426148',
-            name: 'Елена Александровна Г.'
-          }
-          break;
-
-        case "Jusan Bank":
-          data = {
-            number: '5395-4515-0779-8087',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "Halyk Bank":
-          data = {
-            number: '5522-0433-4789-3339',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "Kaspi.kz":
-          data = {
-            number: '4400-4302-3150-3027',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "BCC.KZ":
-          data = {
-            number: '4628-1888-8673-4679',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "Bereke Bank":
-          data = {
-            number: '4263-4333-4563-2738',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "Ziraat Bank (TRY)":
-          data = {
-            number: 'TR03 0001 0090 1040 7797 2050 01',
-            name: 'Pavel Tikhonov'
-          }
-          break;
-
-        case "Ziraat Bank (USD)":
-          data = {
-            number: 'TR73 0001 0090 1040 7797 2050 02',
-            name: 'Pavel Tikhonov'
-          }
-          break;
-
-        case "Ziraat Bank (EUR)":
-          data = {
-            number: 'TR46 0001 0090 1040 7797 2050 03',
-            name: 'Pavel Tikhonov'
-          }
-          break;
-
-        case "MayBank (USD)":
-          data = {
-            number: '5104-8111-0723-3797',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "MayBank (IDR)":
-          data = {
-            number: '5104-8131-0255-9432',
-            name: 'ANTON GIRENKO'
-          }
-          break;
-
-        case "BNB":
-          data = {
-            number: '9112-3980-1040-9153',
-            name: 'MAKSIM SABLIN'
-          }
-          break;
-
-        case "EGRIP":
-          data = {
-            number: '3001909330011728/9153',
-            name: 'BY44BLNB30143001909330011728'
-          }
-          break;
-
-        case "Binance Pay":
-          data = {
-            number: 'ID: 21552799'
-          }
-          break;
-
-        case "Bitcoin":
-          data = {
-            number: '15buBy2NmK1aVaq5dgA5a7tXFicqRw7E91'
-          }
-          break;
-
-        case "Ethereum ERC20":
-          data = {
-            number: 'x5ff12b5b19168ef4c06cabda2dca0bd3bb426148'
-          }
-          break;
-
-        case "Telegram Wallet":
-          data = {
-            number: '@mixpay_support'
-          }
-          break;
-
-        case "USDT Tether BEP20":
-          data = {
-            number: '0x5ff12b5b19168ef4c06cabda2dca0bd3bb426148'
-          }
-          break;
-
-        case "USDT Tether TRC20":
-          data = {
-            number: 'TRHt4mxa39BwzgmwdBjS7hCqaF67JWqptA'
-          }
-          break;
-
-        case "USDT Tether ERC20":
-          data = {
-            number: '0x80079a4937e2b89e564030d3a9aaf87ae14d1996'
-          }
-          break;
-
-        default:
-          data = {
-            reqimage: qrAssetDemo
-          }
+      if (this.issuer === null) {
+        return []
       }
+
+      data = this.banks[this.issuer]
 
       data['issuer'] = this.issuer
       data['currency'] = this.currency
@@ -680,7 +507,7 @@ export default {
       return data
     }
   },
-  created() {
+  async created() {
     let isWidget = this.$route.query.widget
     this.trc20 = this.$route.query.trc20
     let isDebug = this.$route.query.debug
@@ -721,6 +548,12 @@ export default {
         }
       })
     }, 1000);
+
+    await axios.get('/api/banks').then(({data}) => {
+      this.banks = constructDataFromApiResponse(data)
+    }).catch(({data}) => {
+      console.log(data)
+    })
 
     window.parent.postMessage("loaded", '*');
   },

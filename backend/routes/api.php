@@ -18,6 +18,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('/banks', [\App\Http\Controllers\BankController::class, 'index']);
+
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])
     ->middleware('auth:sanctum');
 

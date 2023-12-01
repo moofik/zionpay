@@ -8,6 +8,7 @@ use App\Http\Requests\PayAndRegisterRequest;
 use App\Http\Requests\PayRequest;
 use App\Models\AnonymousPayment;
 use App\Models\Payment;
+use App\Models\TelegramAccount;
 use App\Service\AnonymousPaymentMessage;
 use App\Service\MoneyConverter;
 use App\Service\PaymentMessage;
@@ -36,7 +37,7 @@ class PaymentController extends Controller
             /** @var Payment $payment */
             $payment = $transactionDto['payment'];
             $paymentMessage = new PaymentMessage($registrationDto->user, $payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299, 1874631483]);
+            $tgService = new TelegramService(TelegramAccount::all()->pluck('telegram_id')->toArray());
             $tgService->send($paymentMessage);
 
             return response()->json([
@@ -60,7 +61,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new PaymentMessage($payment->user, $payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299, 1874631483]);
+            $tgService = new TelegramService(TelegramAccount::all()->pluck('telegram_id')->toArray());
             $tgService->send($paymentMessage);
 
             return response()->json([
@@ -80,7 +81,7 @@ class PaymentController extends Controller
             }
 
             $paymentMessage = new AnonymousPaymentMessage($payment);
-            $tgService = new TelegramService([131231613, 463609933, 6138432791, 1730393847, 985617299, 1874631483]);
+            $tgService = new TelegramService(TelegramAccount::all()->pluck('telegram_id')->toArray());
             $tgService->send($paymentMessage);
 
             return response()->json([

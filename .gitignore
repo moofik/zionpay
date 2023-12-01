@@ -7,3 +7,4 @@ vendor
 docker/traefik/acme.json
 backend/node_modules
 backend/vendor
+.DS_Store
